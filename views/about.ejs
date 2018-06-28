@@ -1,0 +1,40 @@
+<% include partials/header %>
+
+<div class="ui main text container">
+	<div class="ui huge header">About</div>
+	<div class="content">
+		<div class="ui medium header">From idea to requirements</div>
+		<p>
+			A group of weather scientists gathered to a meeting on one sunny day in June 2018, and agreed that they desperately need a new application where to log temperature findings from major cities around the world. After an intense planning session, they had come up with a list of requirements:
+			<ul>
+				<li>All features should be usable without a need to log in to application</li>
+				<li>Everyone should be able to report observations for all the locations</li>
+				<li>We want to cover only the largest metropolies (Helsinki, Tokyo, New York, Amsterdam, Dubai), so there is no need to be able to add new locations</li>
+				<li>Everyone should be able to view the observations for all the locations</li>
+				<li>Most important observations</li>
+				<ul>
+					<li>Current temperature based on most recent observation</li>
+					<li>Highest and lowest temperature during last 24 hour period</li>
+				</ul>
+				<li>As this is a scientific application, all observations need to be valid</li>
+				<li>Application will store the observations for future generation, thus it is important to keep observations stored even if the application would sometimes crash</li>
+			</ul>
+		</p>
+		<div class="ui medium header">From requirements to design principles</div>
+		<p>
+			Scientists were happy with their list of requirements and contacted a developer who they knew would be able to convert these requirements in to a real world application. They knew that the developer was still rather junior in web development, so he wouldn't try to over-engineer the solution, instead he would try to keep the application simple and easy to understand. While talking with the developer, scientists mentioned that they had just been granted scholarship and thus were able to buy new modern laptops for their work.
+		</p>
+		<p>
+			Developer went through the requirements and came up with following technology selections and principles for the application which you are now using:
+			<ul>
+				<li>Express framework on top of Node.js would serve well for this kind of web application</li>
+				<li>As the scientists had just bought new laptops, they have modern web browsers and we could use simple and light front-end and build it using <a href="https://semantic-ui.com/" target="_blank">Semantic UI</a></li>
+				<li>Scientists would most probably like to see some trend information also, and for illustration purposes <a href="http://www.chartjs.org/" target=_blank>Chart.js</a> is very nice library</li>
+				<li>To guarantee the persistence of data, MongoDB is a scalable database solution for the need</li>
+			</ul>
+		</p>
+	</div>
+</div>
+
+
+<% include partials/footer %>

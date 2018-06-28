@@ -1,0 +1,124 @@
+<% include partials/header %>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+<div class="ui main text container">
+	<div class="ui top attached segment">
+		<div class="item">
+			<img class="ui centered rounded image" src="<%= location.image %>">
+		</div>
+
+			<div class="ui divided items">
+				<div class="item">
+					<div class="content">
+						<a class="header" href="/locations/<%= location.id %>"><%= location.city %></a>
+						<div class="meta">
+							Local time: <span id="clockbox"></span>
+							<span>Longitude: <%= location.lon %> Latitude: <%= location.lat %></span>
+						</div>
+						<div class="description">
+							<p><%- location.observations[location.observations.length - 1].temp.toString() %>&degC </p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<form class="ui form" action="/locations/<%= location.id %>" method="POST">
+				<div class="field">
+					<label>Temperature</label>
+					<input type="number" step="0.1" name="observation[temp]" placeholder="Temperature" required>
+				</div>
+				<div class="field">
+					<label>Current conditions</label>
+					<input type="text" name="observation[condition]" placeholder="Conditions">
+				</div>
+				<div class="field">
+					<label>Time</label>
+					<input type="datetime-local" name="observation[time]" value="<% Date.now() %>">
+				</div>
+				<input class="ui primary button" type="submit">
+			</form>
+		</div>
+
+		<table class="ui selectable inverted table">
+			<thead>
+				<tr>
+					<th>Time</th>
+					<th>Temperature</th>
+					<th>Conditions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% location.observations.forEach(function(observation){ %>
+				<tr>
+					<td><%- observation.time %></td>
+					<td><%- observation.temp %>&degC</td>
+					<td><%- observation.condition %></td>
+				</tr>
+				<% }); %>
+			</tbody>
+		</table>
+
+		<canvas id="myChart"></canvas>
+</div>
+
+<script>
+	var tzOffset = <%= location.tzOffset %>;
+</script>
+
+<script>
+	var ctx = document.getElementById("myChart").getContext("2d");
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			datasets: [{
+				label: "Temperature",
+				data: [ <% location.observations.forEach(function(observation){ %> {t: <%- observation.time %>, y: <%- observation.temp %>}, <% }); %> ],
+				backgroundColor: ['rgba(255, 99, 132, 0.2)'],
+				borderColor: ['rgba(255,99,132,1)'],
+				fill: false,
+				borderWidth: 2
+			}]
+		},
+		options: {
+			legend: {
+				display: false
+			},
+			responsive: true,
+			title: {
+				display: true,
+				text: "Temperature trend in <%- location.city %>"
+			},
+			scales: {
+				xAxes: [{
+					type: "time",
+					display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Date'
+						},
+						ticks: {
+							major: {
+								fontStyle: 'bold',
+								fontColor: '#FF0000'
+							}
+						},
+					time: {
+						unit: "day"
+					}
+				}],
+				yAxes: [{
+					display: true,
+					scaleLabel: {
+						display: true,
+						labelString: ""
+					}
+				}]
+			}
+		}
+	});
+</script>
+
+<script type="text/javascript" src="/js/show.js"></script>
+
+<% include partials/footer %>

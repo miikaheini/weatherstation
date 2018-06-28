@@ -1,0 +1,32 @@
+<% include partials/header %>
+
+<div class="ui main text container">
+	<h1>WeatherStation</h1>
+
+	<div class="ui divided items">
+			<% locations.forEach(function(location){ %>
+				<div class="item">
+					<div class="image">
+						<img src="<%= location.image %>">
+					</div>
+					<div class="content">
+						<a class="header" href="/locations/<%= location.id %>"><%= location.city %></a>
+						<div class="meta">
+							<span>Longitude: <%= location.lon %> Latitude: <%= location.lat %></span>
+						</div>
+						<div class="description">
+							<% if((location.observations[location.observations.length - 1].time.getTime() + 24 * 60 * 60 * 1000) >  Date.now()) { %>
+							<div id="current"><strong>Current weather: </strong><%- location.observations[location.observations.length - 1].temp.toString() %>&degC, <%= location.observations[location.observations.length - 1].condition %></div>
+							</p>
+							<% } else { %>
+							<p>No observations during last 24 hours.</p>
+							<% }; %>
+						</div>
+					</div>
+				</div>
+			<% }); %>
+	</div>
+
+</div>
+
+<% include partials/footer %>
