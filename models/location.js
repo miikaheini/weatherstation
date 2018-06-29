@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var locationSchema = new mongoose.Schema({
 	city: String,
 	image: String,
-	tzOffset: Number,
+	tz: String,
 	lon: Number,
 	lat: Number,
 	observations: [

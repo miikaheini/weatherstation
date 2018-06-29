@@ -1,25 +1,12 @@
-function GetClock(tzOffset) {
-	var currentDate = new Date();
-	var currentHours = currentDate.getUTCHours() + tzOffset;
-	var currentMinutes = currentDate.getUTCMinutes();
-	var currentSeconds= currentDate.getUTCSeconds();
+// Create a clock and input timezone as parameter
+function GetClock(tz) {
+	var time = moment().tz(tz).format("HH:mm:ss");
 
-	if (currentHours < 10) {
-		currentHours = "0" + currentHours;
-	}
-
-	if (currentMinutes < 10) {
-		currentMinutes = "0" + currentMinutes;
-	}
-
-	if (currentSeconds < 10) {
-		currentSeconds = "0" + currentSeconds;
-	}
-
-	document.getElementById("clockbox").textContent = "" + currentHours + ":" + currentMinutes + ":" + currentSeconds + "";
+	document.getElementById("clockbox").textContent = time;
 }
 
+// Load dynamic content on page load and set update intervals
 window.onload = function(){
-	GetClock(tzOffset);
-	setInterval(function(){GetClock(tzOffset)} , 1000);
+	GetClock(tz);
+	setInterval(function(){GetClock(tz)} , 1000);
 }
