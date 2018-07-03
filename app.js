@@ -2,6 +2,8 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
+var moment = require("moment");
+var momentTz = require("moment-timezone");
 var ts = require("./ts");
 var Location = require("./models/location");
 var seedDB = require("./seed");
@@ -33,7 +35,7 @@ app.get("/", function(req, res){
 		if(err){
 			console.log(ts() + err);
 		} else{
-			res.render("landing", {locations: locations});
+			res.render("landing", {locations: locations, moment: moment, momentTz: momentTz});
 		}
 	});
 });
@@ -44,7 +46,7 @@ app.get("/locations/:id", function(req, res){
 			console.log(ts() + err);
 		} else{
 			console.log(ts() + "Opening location: " + location.city);
-			res.render("show", {location: location});
+			res.render("show", {location: location, moment: moment, momentTz: momentTz});
 		}
 	});
 });
@@ -55,7 +57,10 @@ app.post("/locations/:id/", function(req, res){
 			console.log(ts() + err);
 			res.redirect("/");
 		} else{
-			location.observations.push(req.body.observation);
+			var temp = req.body.observation.temp;
+			var condition = req.body.observation.condition;
+			var time = moment();
+			location.observations.push({temp: temp, condition: condition, time: time});
 			location.save();
 			console.log(ts() + "Added new observation to:" + location.city);
 			res.redirect("/locations/" + location._id);

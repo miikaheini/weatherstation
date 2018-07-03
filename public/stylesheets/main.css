@@ -15,7 +15,7 @@ body {
 }
 
 .container.main {
-	margin-top: 6.0em;
+	margin-top: 4.0em;
 }
 
 .sticky-footer{
@@ -31,3 +31,11 @@ body {
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
+
+.ui.horizontal.segments .ui.segment {
+	max-width: 50%;
+}
+
+/*canvas {
+	max-width: 70%;
+}*/

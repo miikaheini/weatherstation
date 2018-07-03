@@ -15,7 +15,7 @@
 							<span>Longitude: <%= location.lon %> Latitude: <%= location.lat %></span>
 						</div>
 						<div class="description">
-							<% if((location.observations[location.observations.length - 1].time.getTime() + 24 * 60 * 60 * 1000) >  Date.now()) { %>
+							<% if(moment(location.observations[location.observations.length - 1].time).add(1, "day") >  moment()){ %>
 							<div id="current"><strong>Current weather: </strong><%- location.observations[location.observations.length - 1].temp.toString() %>&degC, <%= location.observations[location.observations.length - 1].condition %></div>
 							</p>
 							<% } else { %>
