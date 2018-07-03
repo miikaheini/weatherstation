@@ -36,6 +36,6 @@ body {
 	max-width: 50%;
 }
 
-/*canvas {
-	max-width: 70%;
-}*/
+canvas {
+	cursor:	crosshair;
+}
