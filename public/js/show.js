@@ -11,6 +11,29 @@ function GetClock(tz) {
 	document.getElementById("clockbox").textContent = time;
 }
 
+// Get highest and lowest
+function getHighLow(observations){
+	var highLow = document.getElementById("highLow");
+
+	if (moment(observations[observations.length - 1].t) < moment().add(-1, "day")){
+		highLow.textContent = "No observations in 24 hours."
+	} else {
+		var min = observations[observations.length - 1].y;
+		var max = observations[observations.length - 1].y;
+
+		for (var i = observations.length - 1; i >= 0; i--) {
+			if (moment(observations[i].t) > moment().add(-1, "day") && observations[i].y < min){
+				min = observations[i].y;
+			}
+			if (moment(observations[i].t) > moment().add(-1, "day") && observations[i].y > max){
+				max = observations[i].y;
+			}
+		}
+
+		highLow.innerHTML = "During last 24 hours highest temperature has been " + max + "&degC and lowest " + min + "&degC."
+	}
+}
+
 // Parse data for chart
 function parseChartData(observations, tz) {
 	var data = [];
@@ -116,4 +139,5 @@ window.onload = function(){
 	setInterval(function(){GetClock(tz)} , 1000);
 	drawChart(ctx, data, city, timeMin);
 	initialiseButtons();
+	getHighLow(observations);
 }

@@ -6,38 +6,45 @@
 
 <div class="ui main container">
 	<div class="ui top attached segment">
-		<img class="ui centered rounded image" src="<%= location.image %>">
-		<h2 class="ui dividing header"><%= location.city %></h2>
-
-			<div class="ui two column divided stackable grid">
-				<div class="column">
-						<p>Longitude: <%= location.lon %> Latitude: <%= location.lat %></p>
-						<p><strong>Local time:</strong> <span id="clockbox"></span></p>
-						<p><strong>Latest observation:</strong> <%- location.observations[location.observations.length - 1].temp.toString() %>&degC, <%- location.observations[location.observations.length - 1].condition %></p>
-				</div>
-				<div class="column">
-						<form class="ui form" action="/locations/<%= location.id %>" method="POST">
-							<div class="field">
-								<label>Temperature</label>
-								<input type="number" step="0.1" name="observation[temp]" placeholder="Temperature" required>
-							</div>
-							<div class="field">
-								<label>Current conditions</label>
-								<input type="text" name="observation[condition]" placeholder="Conditions">
-							</div>
-							<input class="ui primary button" type="submit" value="Save">
-						</form>
-				</div>
+		<div class="image segment">
+			<div class="image segment content">
+				<h1 class="ui header"><%= location.city %></h1>
+				<hr>
+				<p><span id="clockbox"></span></p>
 			</div>
+		</div>
+
+		<h3 class="ui dividing header">Current weather in <%= location.city %></h2>
+
+		<div class="ui two column divided stackable grid">
+			<div class="column">
+					<p>Longitude: <%= location.lon %> Latitude: <%= location.lat %></p>
+					<p><strong>Latest observation:</strong> <%- location.observations[location.observations.length - 1].temp.toString() %>&degC, <%- location.observations[location.observations.length - 1].condition %></p>
+					<p><span id="highLow"></span></p>
+			</div>
+			<div class="column">
+					<form class="ui form" action="/locations/<%= location.id %>" method="POST">
+						<div class="field">
+							<label>Temperature</label>
+							<input type="number" step="0.1" name="observation[temp]" placeholder="Temperature" required>
+						</div>
+						<div class="field">
+							<label>Current conditions</label>
+							<input type="text" name="observation[condition]" placeholder="Conditions">
+						</div>
+						<input class="ui primary button" type="submit" value="Save">
+					</form>
+			</div>
+		</div>
 
 		<h3 class="ui dividing header">Observation history in <%= location.city %></h2>
 		<div class="ui two column divided stackable grid">
 			<div class="column">
-				<div align="center">
-					<button class="ui button frame">3 days</button>
-					<button class="ui button frame">Past week</button>
-					<button class="ui button frame">Past month</button>
-					<button class="ui button frame primary">All</button>
+				<div class="four ui buttons">
+					<button class="ui mini button frame">3 days</button>
+					<button class="ui mini button frame">Past week</button>
+					<button class="ui mini button frame">Past month</button>
+					<button class="ui mini button frame primary">All</button>
 				</div>
 				<div>
 					<canvas id="myChart"></canvas>
@@ -73,11 +80,14 @@
 <script>
 	var tz = "<%- location.tz %>";
 	var city = "<%- location.city %>";
+
 	var observations = [];
 	<% for(var i=0;i<location.observations.length;i++){ %>
 		observations.push({t: "<%- location.observations[i].time %>", y: <%- location.observations[i].temp %>});
 	<%};%>
 
+	var imageSegment = document.querySelector(".image.segment");
+	imageSegment.style.setProperty("--image-segment-background", "url(<%- location.image %>)");
 </script>
 
 <script type="text/javascript" src="/js/show.js"></script>

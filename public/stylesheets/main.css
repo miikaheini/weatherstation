@@ -1,11 +1,5 @@
-html {
-	margin: 0;
-	padding: 0;
-}
-
-body {
-	margin: 0;
-	padding: 0
+:root {
+	--image-segment-background: url(http://freedesignfile.com/upload/2017/06/London-city-skyline-vector.jpg);
 }
 
 .sticky-wrap{
@@ -16,6 +10,36 @@ body {
 
 .container.main {
 	margin-top: 4.0em;
+}
+
+.image.segment {
+	background: var(--image-segment-background);
+	background-size: cover;
+	background-position: center;
+	border-radius: inherit;
+}
+
+.image.segment.content {
+	text-align: center;
+	padding-top: 15%;
+	padding-bottom: 3%;
+	background: rgba(255,255,255,0.4);
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+				 0px 8px 13px rgba(0,0,0,0.1),
+				 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.image.segment.content h1 {
+	font-size: 5em;
+}
+
+#clockbox {
+	font-size: 2em;
+}
+
+.image.segment.content hr {
+	width: 50%;
+	border-top: 1px solid black;
 }
 
 .sticky-footer{
