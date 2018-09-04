@@ -29,3 +29,8 @@ Web application was implemented using following components and libraries:
 * [Semantic UI](https://semantic-ui.com) as a user interface framework
 * [Moment.js](https://momentjs.com) for time stamp handling
 * [Chart.js](https://www.chartjs.org) for visualising observed temperatures over time
+
+## To do
+1. Server side validation of user input
+2. Pagination to observations table
+3. Figure out meaningful use for location coordinates
