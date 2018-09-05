@@ -34,3 +34,4 @@ Web application was implemented using following components and libraries:
 1. Server side validation of user input
 2. Pagination to observations table
 3. Figure out meaningful use for location coordinates
+4. Use NPM for frontend frameworks (Semantic-UI, Moment.js, Chart.js)
