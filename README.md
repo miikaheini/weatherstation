@@ -1,7 +1,7 @@
 # WeatherStation
-WeatherStation is a web application for storing weather observations in selected cities.
+WeatherStation is a web application for storing weather observations in selected cities. Most recent version of the application is running in Heroku: https://salty-forest-18766.herokuapp.com/
 
-Most recent version of the application is running in Heroku: https://salty-forest-18766.herokuapp.com/
+NOTE: Currently the database is seeded with new data when application is restarted. This is to have recent observations in the database for demonstration purposes.
 
 ## Requirements
 Following requirements were set for the application:
